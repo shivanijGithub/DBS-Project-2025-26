@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="description"
+      content="Smart Tourism - Discover amazing destinations with our premium tour packages and travel services worldwide">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Smart Tourism</title>
+   <link rel="stylesheet" href="style.css">
+
+   <!-- Bootstrap Links -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <!-- Bootstrap Links -->
+
+
+   <!-- Google Fonts Links -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+   <!-- Google Fonts Links -->
+
+
+   <!-- Font Awesome Cdn -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+   <!-- Font Awesome Cdn -->
+
+   <!-- Firebase SDK -->
+   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+
+</head>
+
+
+
+<body onload="checkLogin()">
+   <script>
+      function checkLogin() {
+         firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+               // If user is not logged in, redirect to login.html
+               window.location.href = "login.html";
+            }
+         });
+      }
+   </script>
+
+   <!-- <navbar> -->
+   <nav class="navbar navbar-expand-lg" id="navbar">
+      <div class="container">
+
+         <a class="navbar-brand" href="index.html" id="logo"><span id="travel">S</span>mart Tourism</a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar"
+            aria-controls="mynavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span><i class="fa-solid fa-bars"></i></span>
+         </button>
+         <div class="collapse navbar-collapse" id="mynavbar">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item">
+                  <a class="nav-link active" href="#home">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#book">Book</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#packages">Packages</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#services">Services</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#gallary">Gallery</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#about">About</a>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+   <!-- <navbar> -->
+
+   <!-- <Home> -->
+
+   <div class="home">
+      <div class="content">
+         <h5>Explore The World With Us</h5>
+         <h1>Visit <span class="changecontent"></span></h1>
+         <p>Discover breathtaking destinations and create unforgettable memories with our expert guides.<br>From
+            stunning beaches to historic landmarks, we make your travel dreams come true.</p>
+         <a href="#book">Book Place</a>
+      </div>
+   </div>
+
+   <!-- <Home> -->
+
+
+   <!-- <section book start> -->
+   <section class="book" id="book">
+      <div class="main-txt">
+         <h1><span>B</span>OOK</h1>
+      </div>
+      <div class="book-img">
+         <img src="./images/book-img.png" alt="">
+      </div>
+      <div class="book-form">
+         <form id="bookingForm">
+            <label for="country">Destination</label>
+            <select id="country" name="country" required>
+               <option value="" disabled selected>Select a country</option>
+               <option value="United States">United States</option>
+               <option value="Canada">Canada</option>
+               <option value="United Kingdom">United Kingdom</option>
+               <option value="Australia">Australia</option>
+               <option value="France">France</option>
+               <option value="Germany">Germany</option>
+               <option value="Japan">Japan</option>
+               <option value="India">India</option>
+               <option value="Brazil">Brazil</option>
+               <option value="South Africa">South Africa</option>
+               <!-- Add more countries as needed -->
+            </select>
+
+            <input type="text" placeholder="Number of Travelers" required>
+            <input type="date" placeholder="Arrival Date" required>
+            <h6>(Arrival date)</h6>
+            <input type="date" placeholder="Departure Date" required>
+            <h6>(Departure Date)</h6>
+            <textarea cols="5" rows="5" placeholder="Your Name & Special Requirements" required></textarea>
+            <input type="submit" class="submit" value="Book Now">
+         </form>
+
+      </div>
+   </section>
+   <!-- <section book start> -->
+
+
+
+   <!-- Packages Start -->
+   <section class="packages" id="packages">
+      <div class="container">
+         <div class="main-txt">
+            <h1><span>P</span>ACKAGES</h1>
+         </div>
+
+         <div class="row" style="margin-top: 30px;">
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./images/uk.png" alt="">
+                  <div class="card-body">
+                     <h3>United Kingdom</h3>
+                     <p>Experience the royal heritage, stunning countryside and vibrant cities of the UK.</p>
+                     <div class="start">
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star "></i>
+                     </div>
+                     <h6>Price: <strong>$1,299</strong></h6>
+                     <a href="#book">Book Now</a>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./images/france.png" alt="">
+                  <div class="card-body">
+                     <h3>France</h3>
+                     <p>Indulge in French cuisine, art, and culture while exploring charming villages and cities.</p>
+                     <div class="start">
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star "></i>
+                     </div>
+                     <h6>Price: <strong>$1,199</strong></h6>
+                     <a href="#book">Book Now</a>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./images/pakistan.png" alt="">
+                  <div class="card-body">
+                     <h3>Pakistan</h3>
+                     <p>Discover majestic mountains, rich history and warm hospitality in this hidden gem.</p>
+                     <div class="start">
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star "></i>
+                     </div>
+                     <h6>Price: <strong>$899</strong></h6>
+                     <a href="#book">Book Now</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="row" style="margin-top: 30px;">
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./images/italy.png" alt="">
+                  <div class="card-body">
+                     <h3>Italy</h3>
+                     <p>Immerse yourself in ancient history, breathtaking art, and world-famous Italian cuisine.</p>
+                     <div class="start">
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star "></i>
+                     </div>
+                     <h6>Price: <strong>$1,249</strong></h6>
+                     <a href="#book">Book Now</a>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./images/india.png" alt="">
+                  <div class="card-body">
+                     <h3>India</h3>
+                     <p>Experience spiritual traditions, diverse landscapes and vibrant cultural heritage.</p>
+                     <div class="start">
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star "></i>
+                     </div>
+                     <h6>Price: <strong>$949</strong></h6>
+                     <a href="#book">Book Now</a>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./images/us.png" alt="">
+                  <div class="card-body">
+                     <h3>United States</h3>
+                     <p>From bustling cities to breathtaking national parks, experience American diversity.</p>
+                     <div class="start">
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star "></i>
+                     </div>
+                     <h6>Price: <strong>$1,399</strong></h6>
+                     <a href="#book">Book Now</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- Packages End -->
+
+
+   <!-- Section Service Start -->
+
+   <section class="services" id="services">
+      <div class="container">
+         <div class="main-txt" style="padding-top: 10px;">
+            <h1><span>S</span>ervices</h1>
+
+         </div>
+         <div class="row" style="margin-top: 30px;">
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <i class="fas fa-hotel"></i>
+                  <div class="card-body text-center">
+                     <h3>Affordable Hotel</h3>
+                     <p>Enjoy handpicked luxury and boutique hotels with excellent amenities, prime locations, and
+                        exceptional service tailored to your comfort and budget.</p>
+                  </div>
+               </div>
+
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <i class="fas fa-utensils"></i>
+                  <div class="card-body text-center">
+                     <h3>Food and Drinks</h3>
+                     <p>Savor authentic local cuisine with our guided food tours, cooking classes, and reservations at
+                        top-rated restaurants showcasing regional specialties.</p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <i class="fas fa-bullhorn"></i>
+                  <div class="card-body text-center">
+                     <h3>Safety Assurance</h3>
+                     <p>Travel with peace of mind with our 24/7 emergency support, detailed safety briefings, and expert
+                        local guides trained in first aid and emergency protocols.</p>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+         <div class="row" style="margin-top: 30px;">
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <i class="fas fa-globe-asia"></i>
+                  <div class="card-body text-center">
+                     <h3>Global Coverage</h3>
+                     <p>Explore over 100 countries across 6 continents with our expertly designed itineraries that blend
+                        popular attractions with hidden local gems.</p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <i class="fas fa-plane"></i>
+                  <div class="card-body text-center">
+                     <h3>Seamless Transportation</h3>
+                     <p>Benefit from hassle-free travel with our premium flight bookings, private transfers, and
+                        comfortable transportation throughout your journey.</p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <i class="fas fa-hiking"></i>
+                  <div class="card-body text-center">
+                     <h3>Exciting Adventures</h3>
+                     <p>Challenge yourself with thrilling activities from mountain trekking to underwater exploration,
+                        all led by certified guides with top-quality equipment.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row" style="margin-top: 30px;">
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <center><img src="https://cdn-icons-png.freepik.com/512/9618/9618244.png" alt="" width=80 height="80">
+                  </center>
+                  <div class="card-body text-center">
+                     <h3>Local Guide</h3>
+                     <p>Local guides are knowledgeable individuals who provide tourists with insider information and
+                        expert guidance on exploring a particular city, region, or attraction. They offer a unique
+                        perspective on the local culture, history, and hidden gems, helping travelers make the
+                        most of their trip</p>
+                  </div>
+               </div>
+
+            </div>
+
+
+   </section>
+   <!-- Section Service End -->
+
+   <!-- section Gallary start -->
+   <section class="gallary" id="gallary">
+      <div class="container">
+         <div class="main-txt" style="padding-top: 10px;">
+            <h1><span>G</span>allery</h1>
+         </div>
+         <div class="row" style="margin-top: 30px;">
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./Img/australia.png" alt="" height="230px">
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./Img/india.png" alt="" height="230px">
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./Img/italy.png" alt="" height="230px">
+               </div>
+            </div>
+         </div>
+         <div class="row" style="margin-top: 30px;">
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./Img/maldives.png" alt="" height="230px">
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./Img/paris.png" alt="" height="230px">
+               </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+               <div class="card">
+                  <img src="./Img/dubai.png" alt="" height="230px">
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- section Gallary end -->
+
+   <!-- About start -->
+   <section class="about" id="about">
+      <div class="container">
+         <div class="main-txt" style="padding-top: 10px;">
+            <h1><span>About</span> Us</h1>
+         </div>
+         <div class="row" style="margin-top: 50px;">
+            <div class="col-md-6 py-3 py-md-0">
+               <div class="card">
+                  <img src="./images/about-img.png" alt="">
+               </div>
+            </div>
+
+            <div class="col-md-6 py-3 py-md-0">
+               <h2>How Smart Tourism Works For You</h2>
+               <p>At Smart Tourism, we believe travel should be transformative, enriching, and hassle-free. With over 15
+                  years of industry experience, our team of passionate travel experts curates personalized journeys that
+                  match your unique interests and preferences. We handle all the complex details - from booking flights
+                  and accommodations to arranging local transportation and exclusive experiences.</p>
+               <p>What sets us apart is our network of local partners in every destination, ensuring you experience
+                  authentic culture beyond typical tourist attractions. Our sustainable travel practices support local
+                  communities while protecting natural environments. We provide 24/7 support throughout your journey, so
+                  you can travel with complete peace of mind.</p>
+               <p>Whether you're seeking a relaxing beach getaway, an adventurous expedition, or a cultural immersion,
+                  our dedicated team will craft the perfect itinerary to create memories that last a lifetime.</p>
+               <button id="about-btn">Read More...</button>
+            </div>
+         </div>
+      </div>
+   </section>
+  
+   <!-- About end -->
+
+   <!-- Contact Section Start -->
+   <section class="contact" id="contact">
+      <div class="container">
+         <div class="main-txt" style="padding-top: 10px;">
+            <h1><span>C</span>ontact Us</h1>
+         </div>
+         <div class="row" style="margin-top: 30px;">
+            <div class="col-md-6 py-3 py-md-0">
+               <div class="card">
+                 <center> <img src="https://img.freepik.com/premium-vector/tourism-logo-icon-brand-identity-sign-symbol_880781-1895.jpg?semt=ais_hybrid&w=740" width =200 height="200" alt="Contact Us" class="img-fluid" style="border-radius: 10px;"></center>
+               </div>
+            </div>
+            <div class="col-md-6 py-3 py-md-0">
+               <div class="card contact-info">
+                  <div class="card-body">
+                     <h3>Contact Information</h3>
+                     <div class="info-item">
+                        <i class="fas fa-location-dot"></i>
+                        <div>
+                           <h5>Address</h5>
+                           <p>123 Tourism Street, Travel City, TC 12345</p>
+                        </div>
+                     </div>
+                     <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                           <h5>Phone</h5>
+                           <p>+1 (555) 123-4567</p>
+                           <p>+1 (555) 987-6543</p>
+                        </div>
+                     </div>
+                     <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                           <h5>Email</h5>
+                           <p>info@smarttourism.com</p>
+                           <p>support@smarttourism.com</p>
+                        </div>
+                     </div>
+                     <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                           <h5>Working Hours</h5>
+                           <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                           <p>Saturday: 10:00 AM - 4:00 PM</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- Contact Section End -->
+
+   <!-- Footer Start -->
+   <footer id="footer">
+      <h1><span>S</span>mart Tourism</h1>
+      <p>Your trusted partner for unforgettable travel experiences around the world.</p>
+      <div class="social-links">
+         <a href="https://twitter.com/YourProfile" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+         <a href="https://facebook.com/YourPage" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+         <a href="https://help.instagram.com/1731078377046291" target="_blank"><i
+               class="fa-brands fa-instagram"></i></a>
+         <a href="https://www.youtube.com/watch?v=YMSnQmGisfc" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+         <a href="https://pinterest.com/YourProfile" target="_blank"><i class="fa-brands fa-pinterest-p"></i></a>
+      </div>
+      <div class="credite">
+         <p>Designed By <a href="#">SmartTourism Team</a></p>
+      </div>
+      <div class="copyyright">
+         <p>&copy;Copyright Smart Tourism 2025. All Rights Reserved</p>
+      </div>
+   </footer>
+   <!-- Footer End -->
+   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+   <script>
+
+      // ✅ Firebase configuration
+      const firebaseConfig = {
+         // apiKey: "AIzaSyBxjupn8f8SpLR6KkcCwx4tkez0soyfp1A",
+         // authDomain: "tourist-d06ca.firebaseapp.com",
+         // projectId: "tourist-d06ca",
+         // storageBucket: "tourist-d06ca.appspot.com", 
+         // messagingSenderId: "173242412336",
+         // appId: "1:173242412336:web:aeb73abb45c6e012882cf5",
+         // measurementId: "G-J91JSX7RBP"
+         apiKey: "AIzaSyDe3eosQvtH0ezzUFvd_qZgkx5AcJGMgVA",
+         authDomain: "login-3384d.firebaseapp.com",
+         projectId: "login-3384d",
+         storageBucket: "login-3384d.firebasestorage.app",
+         messagingSenderId: "165459530800",
+         appId: "1:165459530800:web:a545ef453d721bde48c9f5",
+         measurementId: "G-Z5N2VSCQJ",
+      };
+
+      // ✅ Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // ✅ Handle booking form submission
+      document.addEventListener("DOMContentLoaded", function () {
+         const form = document.getElementById('bookingForm');
+         const submitButton = document.querySelector('#book .submit');
+
+         if (form) {
+            form.addEventListener('submit', function (event) {
+               event.preventDefault();
+
+               const userId = sessionStorage.getItem('userId') || 'anonymous';
+
+               const destination = document.getElementById('country').value.trim();
+               const travelers = form.querySelector('input[placeholder="Number of Travelers"]').value.trim();
+               const [arrivalInput, departureInput] = form.querySelectorAll('input[type="date"]');
+               const arrivalDate = arrivalInput?.value;
+               const departureDate = departureInput?.value;
+               const details = form.querySelector('textarea')?.value.trim();
+
+               // Change button state to loading
+               const originalButtonText = submitButton.value;
+               submitButton.value = 'Booking...';
+               submitButton.disabled = true;
+
+               // ✅ Save booking to Firestore
+               db.collection('bookings').add({
+                  userId,
+                  destination,
+                  travelers,
+                  arrivalDate,
+                  departureDate,
+                  details,
+                  bookingDate: new Date(),
+                  status: 'pending'
+               })
+                  .then(() => {
+                     alert('✅ Booking submitted successfully! We will contact you soon.');
+                     form.reset();
+                  })
+                  .catch((error) => {
+                     console.error("❌ Error submitting booking:", error);
+                     alert('Error submitting booking: ' + error.message);
+                  })
+                  .finally(() => {
+                     submitButton.value = originalButtonText;
+                     submitButton.disabled = false;
+                  });
+            });
+         }
+      });
+
+      // ✅ Function to book a specific package
+      function bookPackage(packageName) {
+         document.getElementById('book')?.scrollIntoView({ behavior: 'smooth' });
+         const destinationSelect = document.getElementById('country');
+         if (destinationSelect) {
+            // Find the option with the matching text
+            for (let i = 0; i < destinationSelect.options.length; i++) {
+               if (destinationSelect.options[i].text === packageName) {
+                  destinationSelect.selectedIndex = i;
+                  break;
+               }
+            }
+         }
+
+         const travelersInput = form.querySelector('input[placeholder="Number of Travelers"]');
+         if (travelersInput) travelersInput.focus();
+      }
+
+      document.getElementById('contactForm')?.addEventListener('submit', function(event) {
+         event.preventDefault();
+         alert('Thank you for your message! We will get back to you soon.');
+         event.target.reset();
+      });
+   </script>
+
+
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>

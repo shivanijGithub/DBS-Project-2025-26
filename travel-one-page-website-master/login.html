@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Tourism - Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+
+
+
+<body>
+    <script>
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // If user is logged in, redirect to index.html
+                window.location.href = "index.html";
+            }
+        });
+    </script>
+    <div class="login-container">
+        <div class="login-box">
+            <h2><span>S</span>mart Tourism</h2>
+            <div id="loginFormContainer">
+                <form id="loginForm" onsubmit="return loginUser(event)">
+                    <div class="input-box">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                    </div>
+                    <div class="input-box">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit">Login</button>
+                    <p class="signup-link">Don't have an account? <a href="#" onclick="toggleForms()">Sign up</a></p>
+                </form>
+            </div>
+
+            <div id="signupFormContainer" style="display: none;">
+                <form id="signupForm" onsubmit="return registerUser(event)">
+                    <div class="input-box">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="signupName" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-box">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="signupEmail" placeholder="Email" required>
+                    </div>
+                    <div class="input-box">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signupPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                    <p class="signup-link">Already have an account? <a href="#" onclick="toggleForms()">Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            // apiKey: "YOUR_API_KEY",
+            // authDomain: "YOUR_AUTH_DOMAIN",
+            // projectId: "YOUR_PROJECT_ID",
+            // storageBucket: "YOUR_STORAGE_BUCKET",
+            // messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            // appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyDe3eosQvtH0ezzUFvd_qZgkx5AcJGMgVA",
+            authDomain: "login-3384d.firebaseapp.com",
+            projectId: "login-3384d",
+            storageBucket: "login-3384d.firebasestorage.app",
+            messagingSenderId: "165459530800",
+            appId: "1:165459530800:web:a545ef453d721bde48c9f5",
+            measurementId: "G-Z5N2VSCQJ",
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get references to Firebase services
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Toggle between login and signup forms
+        function toggleForms() {
+            const loginForm = document.getElementById('loginFormContainer');
+            const signupForm = document.getElementById('signupFormContainer');
+
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+            }
+        }
+
+        // Login function
+        function loginUser(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Show loading state
+            document.querySelector('button[type="submit"]').textContent = 'Logging in...';
+
+            // Sign in with Firebase Authentication
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Store login state
+                    sessionStorage.setItem('loggedIn', 'true');
+                    // Store user ID
+                    sessionStorage.setItem('userId', userCredential.user.uid);
+                    // Redirect to home page
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    alert('Login failed: ' + error.message);
+                    document.querySelector('.login-container').classList.add('error');
+                    setTimeout(() => {
+                        document.querySelector('.login-container').classList.remove('error');
+                    }, 500);
+                    // Reset button text
+                    document.querySelector('button[type="submit"]').textContent = 'Login';
+                });
+        }
+
+        // Register function
+        function registerUser(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            // Show loading state
+            document.querySelector('#signupForm button[type="submit"]').textContent = 'Signing up...';
+
+            // Create user with Firebase Authentication
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Add user data to Firestore
+                    return db.collection('users').doc(userCredential.user.uid).set({
+                        name: name,
+                        email: email,
+                        createdAt: new Date()
+                    })
+                        .then(() => {
+                            // Store login state
+                            sessionStorage.setItem('loggedIn', 'true');
+                            // Store user ID
+                            sessionStorage.setItem('userId', userCredential.user.uid);
+                            // Redirect to home page
+                            window.location.href = 'index.html';
+                        });
+                })
+                .catch((error) => {
+                    alert('Registration failed: ' + error.message);
+                    document.querySelector('.login-container').classList.add('error');
+                    setTimeout(() => {
+                        document.querySelector('.login-container').classList.remove('error');
+                    }, 500);
+                    // Reset button text
+                    document.querySelector('#signupForm button[type="submit"]').textContent = 'Sign Up';
+                });
+        }
+
+        // Check if user is already logged in
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                sessionStorage.setItem('loggedIn', 'true');
+                sessionStorage.setItem('userId', user.uid);
+
+                // Only redirect if we're on the login page
+                if (window.location.pathname.includes('login.html')) {
+                    window.location.href = 'index.html';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
